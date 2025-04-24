@@ -19,7 +19,7 @@ function grid(size){
     hoverEffect();
 }
 
-grid(1);
+grid(16);
 
 function hoverEffect(){
 const hovers = document.querySelectorAll(".row");
