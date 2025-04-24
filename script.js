@@ -16,25 +16,40 @@ function grid(size){
         }
         container.appendChild(column);
     }
+    hoverEffect();
 }
 
-grid(16);
+grid(1);
 
-
+function hoverEffect(){
 const hovers = document.querySelectorAll(".row");
 hovers.forEach( hover =>{
     hover.addEventListener("mouseover",()=>{
-        hover.style.backgroundColor="black";
+        hover.style.backgroundColor= randomColor();
+        // Get the current opacity or default to 0
+        let currentOpacity = parseFloat(hover.style.opacity) || 0;
+
+        // Cap the opacity at 1 to avoid going over
+        let newOpacity = Math.min(currentOpacity + 0.1, 1);
+
+        hover.style.opacity = newOpacity;
     })
 })
 
+}
+
 function newgrid(){
-    location.reload(); // Reloads the current page
     let n;
     do{
         n =Number(prompt("Enter gris size:"));
 
     }while(n<0 && n>100);
+    container.innerHTML="";
     grid(n);
+}
+
+function randomColor(){
+    const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'brown', 'black', 'white'];
+    return colors[Math.floor(Math.random() * 10)];
 }
 document.querySelector("button").addEventListener("click",newgrid);
